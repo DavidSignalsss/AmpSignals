@@ -2,6 +2,21 @@
 
 High-Fidelity Neural Amp Simulation running in the browser.
 
+## 📸 Screenshots
+
+<div align="center">
+
+### Clean USA
+![Fender Deluxe](Screenshots/Fender.png)
+
+### Drive BRIT
+![Marshal Plexi](screenshots/Marshal.png)
+
+### Chime UK
+![High Fuzz](screenshots/VOX.png)
+
+</div>
+
 ## Getting Started
 
 Because of how this project is set up, you can now run it directly by opening the `index.html` file in your browser, or dragging it into a browser tab.
