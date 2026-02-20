@@ -31,16 +31,16 @@ High-Fidelity Neural Amp Simulation running in the browser. With IR's files uplo
 
 | Control | Function | Range |
 |---------|----------|-------|
-| **THRESH** | Noise gate threshold | -80 - 0 |
-| **BRIGHT** | High-frequency boost | On/Off |
-| **GAIN** | Preamp gain | 0 - 10 |
-| **COMP** | Compression amount | 0.0 - 1.0 |
-| **BASS** | Low frequencies | -10dB - +10dB |
-| **MID** | Mid frequencies | -10dB - +10dB |
-| **TREBLE** | High frequencies | -10dB - +10dB |
-| **VOICE** | Mid-frequency contour | -5 - +5 |
-| **PRESENCE** | Ultra-high frequencies | 0 - 10 |
-| **MASTER** | Global volume | 0 - 10 |
+| **THRESH** | Noise gate threshold |   -80 - 0 |
+| **BRIGHT** | High-frequency boost |   On/Off |
+| **GAIN** | Preamp gain |   0 - 10 |
+| **COMP** | Compression amount |   0.0 - 1.0 |
+| **BASS** | Low frequencies |   -10dB - +10dB |
+| **MID** | Mid frequencies |   -10dB - +10dB |
+| **TREBLE** | High frequencies |   -10dB - +10dB |
+| **VOICE** | Mid-frequency contour |   -5 - +5 |
+| **PRESENCE** | Ultra-high frequencies |   0 - 10 |
+| **MASTER** | Global volume |   0 - 10 |
 
 ### 🔊 Advanced Audio Features
 
