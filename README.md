@@ -1,6 +1,6 @@
 # Sim Stomp Signals
 
-High-Fidelity Neural Amp Simulation running in the browser.
+High-Fidelity Neural Amp Simulation running in the browser. With IR's files uploades system.
 
 ## 📸 Screenshots
 
