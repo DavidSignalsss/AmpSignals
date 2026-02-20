@@ -1,0 +1,954 @@
+:root {
+    --bg-dark: #121212;
+    --bg-panel: #1a1a1a;
+    --bg-card: #252525;
+
+    /* Neural-like colors */
+    --accent-primary: #00d4ff;
+    /* Digital Cyan */
+    --accent-glow: rgba(0, 212, 255, 0.6);
+
+    --text-main: #e0e0e0;
+    --text-muted: #666;
+
+    --knob-bg: #222;
+    --knob-border: #000;
+    --knob-indicator: #fff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    /* Prevent selection while dragging */
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-image: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+    opacity: 0.8;
+}
+
+.logo {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #444;
+}
+
+.logo .accent {
+    color: var(--text-main);
+}
+
+.by-line {
+    font-size: 0.7em;
+    color: #333;
+}
+
+.power-btn {
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.power-btn:hover {
+    color: var(--text-main);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.power-btn.active {
+    color: var(--accent-primary);
+    filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+/* --- AMP HEAD UNIT --- */
+.amp-head-unit {
+    width: 100%;
+    background-color: #1e1e1e;
+    border-radius: 4px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Grille & Logo */
+.amp-grille {
+    height: 120px;
+    background:
+        repeating-linear-gradient(45deg, #111 0, #111 2px, #1a1a1a 2px, #1a1a1a 4px),
+        linear-gradient(to bottom, #000, #1a1a1a);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #000;
+    box-shadow: inset 0 0 40px #000;
+}
+
+.tube-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, rgba(255, 150, 50, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+/* .power-btn.active ~ .amp-head-unit .tube-glow {} */
+
+.amp-head-unit.powered-on .tube-glow {
+    opacity: 1;
+}
+
+.logo-plate {
+    background: #000;
+    padding: 5px 15px;
+    border: 1px solid #333;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.logo-plate span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    background: linear-gradient(to bottom, #ccc, #666);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-plate .model-name {
+    font-size: 0.5rem;
+    letter-spacing: 2px;
+    color: var(--accent-primary);
+    -webkit-text-fill-color: var(--accent-primary);
+    text-shadow: 0 0 10px var(--accent-glow);
+    margin-top: -2px;
+}
+
+/* Control Panel */
+.control-panel {
+    background: linear-gradient(180deg, #2a2a2a 0%, #1f1f1f 100%);
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Brushed Metal Texture Overlay */
+.control-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+');
+    /* Simple noise */
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.section-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.separator {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, #444, transparent);
+    margin: 0 10px;
+}
+
+/* SWITCHES */
+.switch-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    /* Interaction fix */
+}
+
+/* Label text span */
+.switch-wrapper span {
+    font-size: 0.6rem;
+    color: #888;
+    font-weight: 600;
+    pointer-events: none;
+    /* Let click pass to label */
+}
+
+.switch-wrapper input {
+    display: none;
+}
+
+.toggle-switch {
+    width: 30px;
+    height: 50px;
+    background: #111;
+    border-radius: 4px;
+    position: relative;
+    box-shadow: inset 0 2px 5px #000;
+    border: 1px solid #333;
+    cursor: pointer;
+    pointer-events: none;
+    /* Let click pass to label */
+}
+
+/* The actual lever */
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(to bottom, #ccc, #888);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px #000;
+    transition: all 0.2s;
+    top: 24px;
+    /* Off position (down) */
+}
+
+/* Checked State - Input is sibling in label or child? 
+   In HTML: label > input, div.toggle-switch
+   So: input:checked ~ .toggle-switch
+*/
+.switch-wrapper input:checked~.toggle-switch::after {
+    top: 2px;
+    /* On position (up) */
+    background: linear-gradient(to bottom, #fff, #ccc);
+}
+
+/* Active LED indicator for switch */
+.switch-wrapper input:checked~.toggle-switch {
+    box-shadow: 0 0 5px var(--accent-glow);
+    border-color: var(--accent-primary);
+}
+
+
+/* KNOBS */
+.knob-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.knob-wrapper label {
+    margin-top: 10px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 1px;
+}
+
+.knob {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: conic-gradient(from 180deg, #111 0%, #333 100%);
+    box-shadow:
+        0 5px 10px rgba(0, 0, 0, 0.5),
+        inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    cursor: grab;
+    border: 2px solid #000;
+}
+
+.knob-wrapper.big .knob {
+    width: 70px;
+    height: 70px;
+}
+
+.knob-wrapper.big {
+    margin: 0 10px;
+}
+
+.knob-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.knob-indicator::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 15px;
+    background: var(--text-muted);
+    border-radius: 2px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 1);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+/* Active state for knob indicator */
+.knob-wrapper:hover .knob-indicator::after,
+.knob-wrapper.is-dragging .knob-indicator::after {
+    background: var(--accent-primary);
+    box-shadow: 0 0 5px var(--accent-glow);
+}
+
+.floating-tooltip {
+    position: absolute;
+    top: -5px;
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--accent-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-family: 'Roboto Mono', monospace;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    border: 1px solid #333;
+    z-index: 10;
+}
+
+.knob-wrapper:hover .floating-tooltip,
+.knob-wrapper.is-dragging .floating-tooltip {
+    opacity: 1;
+    transform: translateY(-20px);
+}
+
+/* AMP SELECTOR STRIP */
+.amp-selector-strip {
+    background: #0a0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    gap: 20px;
+    border-top: 1px solid #000;
+}
+
+.selector-label {
+    font-size: 0.6rem;
+    color: #444;
+    font-weight: 700;
+    margin-right: 20px;
+}
+
+.amp-btn {
+    font-size: 0.75rem;
+    color: #666;
+    background: #151515;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+}
+
+.amp-btn:hover {
+    color: #ccc;
+    border-color: #555;
+}
+
+.amp-btn.active {
+    background: #222;
+    color: var(--accent-primary);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+/* CAB SECTION */
+.cab-section {
+    background: #111;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #222;
+}
+
+.cab-display {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.ir-upload-btn {
+    font-size: 0.7rem;
+    color: var(--text-main);
+    background: #333;
+    padding: 4px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    border: 1px solid #444;
+}
+
+.ir-upload-btn:hover {
+    background: #444;
+    border-color: #666;
+}
+
+/* VU STRIP at bottom */
+.vu-meter-strip {
+    height: 4px;
+    background: #000;
+    width: 100%;
+}
+
+.vu-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #00d4ff, #fff);
+    transition: width 0.05s;
+    box-shadow: 0 0 5px var(--accent-glow);
+}
+
+.footer {
+    padding: 20px;
+    background: #000;
+    text-align: center;
+    color: #444;
+    font-size: 0.8rem;
+    border-top: 1px solid #111;
+}
+
+/* --- Interaction Fixes --- */
+.knob-wrapper,
+.switch-wrapper {
+    z-index: 10;
+    /* Ensure controls are above texture overlays */
+    position: relative;
+    pointer-events: auto;
+}
+
+/* --- Modals --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid #333;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 1);
+    max-width: 500px;
+    width: 90%;
+}
+
+.modal-content h1,
+.modal-content h2 {
+    margin: 0 0 10px;
+    color: var(--text-main);
+    letter-spacing: 2px;
+}
+
+.modal-content .subtitle {
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.instruction-list {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.instruction-list p {
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.modal-btn {
+    background: var(--accent-primary);
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.modal-btn:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--accent-glow);
+}
+
+.modal-btn.secondary {
+    background: #333;
+    color: #fff;
+}
+
+.modal-btn.secondary:hover {
+    background: #444;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.setting-row select {
+    background: #222;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+/* --- Dynamic Skins --- */
+
+/* --- Premium Dynamic Skins --- */
+
+/* 1. Fender Skin (Clean USA) - Classic Black Tolex & Silver Sparkle */
+.skin-fender {
+    background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%);
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 4px solid #111;
+}
+
+.skin-fender .amp-grille {
+    background:
+        linear-gradient(90deg, transparent 95%, rgba(200, 200, 210, 0.1) 95%),
+        linear-gradient(transparent 95%, rgba(200, 200, 210, 0.1) 95%),
+        #c8c8d2;
+    background-size: 4px 4px;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+    border: 2px solid #555;
+    margin: 15px;
+    border-radius: 2px;
+}
+
+.skin-fender .control-panel {
+    background: linear-gradient(180deg, #e0e0e0 0%, #b0b0b0 100%);
+    /* Silver panel */
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #666;
+    padding: 20px 10px;
+}
+
+.skin-fender .knob {
+    background: #000;
+    border: 2px solid #444;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.skin-fender .knob-indicator::after {
+    background: #fff;
+}
+
+/* 2. Vox Skin (Chime UK) - Fawn Tolex & Diamond Grille */
+.skin-vox {
+    background: #d2c19e;
+    /* Fawn */
+    background-image:
+        repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.02) 0px, rgba(0, 0, 0, 0.02) 2px, transparent 2px, transparent 4px);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.3);
+    border: 4px solid #bba67e;
+}
+
+.skin-vox .amp-grille {
+    background:
+        linear-gradient(45deg, #1a110a 25%, transparent 25%),
+        linear-gradient(-45deg, #1a110a 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #1a110a 75%),
+        linear-gradient(-45deg, transparent 75%, #1a110a 75%),
+        #2d1d11;
+    /* Diamond lattice */
+    background-size: 20px 30px;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
+    border: 2px solid #4a3a2a;
+    margin: 15px;
+}
+
+.skin-vox .control-panel {
+    background: linear-gradient(180deg, #8b0000 0%, #4a0000 100%);
+    /* Deep Red/Maroon */
+    border-top: 2px solid #aa0000;
+    border-bottom: 2px solid #300;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.skin-vox .knob {
+    background: #111;
+    border: 2px solid #222;
+}
+
+.skin-vox .knob-indicator::after {
+    background: #fff;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.skin-vox label {
+    color: #ffd700;
+    /* Gold text */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* 3. Marshall Skin (Drive Brit) - Black Tolex & Gold Panel */
+.skin-marshall {
+    background: #111;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 2px 100%;
+}
+
+.skin-marshall .amp-grille {
+    background:
+        repeating-linear-gradient(0deg, #111, #111 2px, #222 2px, #222 4px);
+    background-image:
+        repeating-linear-gradient(0deg, #151515 0px, #151515 1px, #000 1px, #000 3px),
+        repeating-linear-gradient(90deg, #151515 0px, #151515 1px, #000 1px, #000 3px);
+    box-shadow: inset 0 0 60px #000;
+    border: 1px solid #333;
+    margin: 20px;
+}
+
+.skin-marshall .control-panel {
+    background: linear-gradient(135deg, #e6cfa3 0%, #bbaa77 50%, #cb9b51 100%);
+    /* Brushed Gold */
+    border: 2px solid #cb9b51;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    padding: 25px 10px;
+}
+
+.skin-marshall .knob {
+    background: #000;
+    border: 2px solid #cb9b51;
+    /* Gold trim */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.skin-marshall .knob-indicator::after {
+    background: #cb9b51;
+}
+
+.skin-marshall label {
+    color: #222;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* --- Custom Dropdown --- */
+.custom-select-wrapper {
+    position: relative;
+    user-select: none;
+    width: 250px;
+}
+
+.custom-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-select__trigger {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    background: #222;
+    cursor: pointer;
+    border: 1px solid #444;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.custom-select__trigger:hover {
+    border-color: var(--accent-primary);
+}
+
+.custom-options {
+    position: absolute;
+    display: block;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #444;
+    border-top: 0;
+    background: #1a1a1a;
+    transition: all 0.2s;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 100;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.custom-select.open .custom-options {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+    top: 45px;
+}
+
+.custom-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 22px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ccc;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 1px solid #222;
+}
+
+.custom-option:last-of-type {
+    border-bottom: none;
+}
+
+.custom-option:hover {
+    background: #2a2a2a;
+    color: var(--accent-primary);
+}
+
+.custom-option.selected {
+    color: var(--accent-primary);
+    background: #222;
+}
+
+/* Thumbnails (CSS Gen) */
+.option-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #555;
+    background: #000;
+}
+
+.skin-fender-thumb {
+    background: #333;
+}
+
+.skin-vox-thumb {
+    background: #4a1a1a;
+}
+
+.skin-marshall-thumb {
+    background: #cb9b51;
+}
+
+.arrow {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #fff;
+    transition: transform 0.2s;
+}
+
+.custom-select.open .arrow {
+    transform: rotate(180deg);
+}
+
+/* Updated Header */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #000;
+    border-bottom: 1px solid #111;
+}
+
+.top-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.icon-btn {
+    background: none;
+    border: 1px solid #333;
+    color: #888;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.icon-btn:hover {
+    color: #fff;
+    border-color: #666;
+}
+
+/* --- New Skins & Thumbnails --- */
+
+.skin-modern-thumb {
+    background: #000;
+    border: 1px solid #777;
+    box-shadow: inset 0 0 5px #fff;
+}
+
+.skin-vintage-thumb {
+    background: #d4c5a3;
+    border: 1px solid #8b7d5b;
+}
+
+.skin-boutique-thumb {
+    background: #500;
+    border: 1px solid #f00;
+}
+
+/* Modern Skin */
+.skin-modern .amp-grille {
+    background-image: repeating-linear-gradient(90deg, #000 0px, #000 2px, #1a1a1a 2px, #1a1a1a 4px);
+    border-bottom: 4px solid #333;
+}
+
+.skin-modern .control-panel {
+    background: linear-gradient(180deg, #111 0%, #000 100%);
+}
+
+.skin-modern .knob {
+    background: #333;
+    border: 2px solid #888;
+}
+
+.skin-modern .knob-indicator {
+    background: #f00;
+    box-shadow: 0 0 5px #f00;
+}
+
+/* Vintage Skin */
+.skin-vintage .amp-grille {
+    background-image: repeating-linear-gradient(45deg, #d4c5a3 0px, #d4c5a3 2px, #c0b080 2px, #c0b080 4px);
+}
+
+.skin-vintage .control-panel {
+    background: linear-gradient(180deg, #d4c5a3 0%, #b0a080 100%);
+}
+
+.skin-vintage .logo-plate {
+    background: #420;
+    border: 1px solid #640;
+}
+
+.skin-vintage .knob {
+    background: #420;
+    border-color: #640;
+}
+
+.skin-vintage .knob-indicator {
+    background: #fff;
+}
+
+.skin-vintage label,
+.skin-vintage .selector-label {
+    color: #420 !important;
+    font-weight: 800;
+}
+
+/* Boutique Skin */
+.skin-boutique .amp-grille {
+    background: radial-gradient(circle, #400 0%, #200 100%);
+}
+
+.skin-boutique .control-panel {
+    background: linear-gradient(to right, #2a0a0a, #4a1a1a, #2a0a0a);
+    box-shadow: inset 0 0 20px rgba(255, 0, 0, 0.3);
+}
+
+.skin-boutique .knob {
+    background: #fff;
+    border: 2px solid #500;
+}
+
+.skin-boutique .knob-indicator {
+    background: #500;
+}
+
+.skin-boutique .logo-plate {
+    border: 1px solid #f00;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}

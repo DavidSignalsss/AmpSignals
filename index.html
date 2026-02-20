@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sim Stomp Signals</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Welcome Screen Modal -->
+    <div id="welcome-modal" class="modal-overlay active">
+        <div class="modal-content">
+            <h1>SIM STOMP SIGNALS</h1>
+            <p>High-Fidelity Neural Amp Simulation</p>
+            <p class="subtitle">by David Signals</p>
+            <div class="instruction-list">
+                <p>⚠️ <strong>Audio Context Required</strong></p>
+                <p>Click START to initialize the audio engine.</p>
+            </div>
+            <button id="start-btn" class="modal-btn">INITIALIZE SYSTEM</button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>SETTINGS</h2>
+            <div class="setting-row">
+                <label>Audio Output Device</label>
+                <select id="audio-output-select">
+                    <option value="default">System Default</option>
+                </select>
+            </div>
+            <div class="setting-row">
+                <label>Buffer Size (Latency)</label>
+                <select id="buffer-size-select">
+                    <option value="64">64 ms (Ultra Low)</option>
+                    <option value="128" selected>128 ms (Low)</option>
+                    <option value="256">256 ms (Medium)</option>
+                    <option value="512">512 ms (High)</option>
+                    <option value="1024">1024 ms (Very High)</option>
+                </select>
+            </div>
+            <div class="setting-row">
+                <label>Input Quality</label>
+                <select>
+                    <option>High (48kHz)</option>
+                    <option>Standard (44.1kHz)</option>
+                </select>
+            </div>
+            <div class="setting-row">
+                <label>Oversampling</label>
+                <select>
+                    <option>4x (High Quality)</option>
+                    <option>2x (Balanced)</option>
+                    <option>None (Low CPU)</option>
+                </select>
+            </div>
+            <button id="close-settings-btn" class="modal-btn secondary">CLOSE</button>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <header class="top-bar">
+            <div class="logo">SIM STOMP <span class="accent">SIGNALS</span></div>
+            <div class="top-controls">
+                <button id="settings-btn" class="icon-btn">⚙️ SETTINGS</button>
+                <button id="power-btn" class="power-btn" aria-label="Power On/Off">
+                    <div class="power-icon">⏻</div>
+                </button>
+            </div>
+        </header>
+
+        <main class="amp-head-unit skin-fender">
+            <!-- Top Grille / Tubes Visual -->
+            <div class="amp-grille">
+                <div class="tube-glow"></div>
+                <div class="logo-plate">
+                    <span>SIM STOMP</span>
+                    <span class="model-name">NEURAL ARCHETYPE</span>
+                </div>
+            </div>
+
+            <!-- Main Control Panel -->
+            <div class="control-panel">
+
+                <!-- Input / Pre Section -->
+                <div class="section-group input-section">
+                    <label class="switch-wrapper">
+                        <span>GATE</span>
+                        <input type="checkbox" id="sw-gate" checked>
+                        <div class="toggle-switch"></div>
+                    </label>
+                    <div class="knob-wrapper">
+                        <div class="knob" id="knob-gate-thresh" data-param="gate" data-min="-80" data-max="0"
+                            data-value="-60">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>THRESH</label>
+                        <div class="floating-tooltip">-60dB</div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <!-- Pre-Amp / Drive Section -->
+                <div class="section-group drive-section">
+                    <label class="switch-wrapper">
+                        <span>BRIGHT</span>
+                        <input type="checkbox" id="sw-bright">
+                        <div class="toggle-switch"></div>
+                    </label>
+                    <label class="switch-wrapper">
+                        <span>DRIVE</span>
+                        <input type="checkbox" id="sw-drive">
+                        <div class="toggle-switch"></div>
+                    </label>
+                    <div class="knob-wrapper">
+                        <div class="knob" id="knob-compressor" data-param="compressor" data-min="0" data-max="1"
+                            data-value="0">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>COMP</label>
+                        <div class="floating-tooltip">0.0</div>
+                    </div>
+                    <div class="knob-wrapper big">
+                        <div class="knob" id="knob-gain" data-param="preGain" data-min="0" data-max="10" data-value="3">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>GAIN</label>
+                        <div class="floating-tooltip">3.0</div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <!-- Tone Stack -->
+                <div class="section-group eq-section">
+                    <div class="knob-wrapper">
+                        <div class="knob" id="knob-bass" data-param="bass" data-min="-10" data-max="10" data-value="0">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>BASS</label>
+                        <div class="floating-tooltip">0.0</div>
+                    </div>
+                    <div class="knob-wrapper">
+                        <div class="knob" id="knob-mid" data-param="mid" data-min="-10" data-max="10" data-value="0">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>MID</label>
+                        <div class="floating-tooltip">0.0</div>
+                    </div>
+                    <div class="knob-wrapper">
+                        <div class="knob" id="knob-treble" data-param="treble" data-min="-10" data-max="10"
+                            data-value="0">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>TREBLE</label>
+                        <div class="floating-tooltip">0.0</div>
+                    </div>
+                </div>
+
+                <div class="separator"></div>
+
+                <!-- Post-Amp / Power Section -->
+                <div class="section-group power-section">
+                    <div class="knob-wrapper">
+                        <div class="knob" id="knob-voice" data-param="voice" data-min="-5" data-max="5" data-value="0">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>VOICE</label>
+                        <div class="floating-tooltip">0.0</div>
+                    </div>
+                    <div class="knob-wrapper">
+                        <div class="knob" id="knob-presence" data-param="presence" data-min="0" data-max="10"
+                            data-value="5">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>PRESENCE</label>
+                        <div class="floating-tooltip">5.0</div>
+                    </div>
+                    <div class="knob-wrapper big">
+                        <div class="knob" id="knob-master" data-param="master" data-min="0" data-max="10"
+                            data-value="5">
+                            <div class="knob-indicator"></div>
+                        </div>
+                        <label>MASTER</label>
+                        <div class="floating-tooltip">5.0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amp Model Selector (Custom Dropdown) -->
+            <div class="amp-selector-strip">
+                <div class="custom-select-wrapper">
+                    <div class="custom-select">
+                        <div class="custom-select__trigger">
+                            <span id="selected-amp-name">CLEAN (USA)</span>
+                            <div class="arrow"></div>
+                        </div>
+                        <div class="custom-options">
+                            <div class="custom-option selected" data-value="fender_clean">
+                                <span class="option-img skin-fender-thumb"></span>
+                                CLEAN (USA)
+                            </div>
+                            <div class="custom-option" data-value="vox_chime">
+                                <span class="option-img skin-vox-thumb"></span>
+                                CHIME (UK)
+                            </div>
+                            <div class="custom-option" data-value="marshall_drive">
+                                <span class="option-img skin-marshall-thumb"></span>
+                                DRIVE (BRIT)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cab / IR Loader -->
+            <div class="cab-section">
+                <div class="cab-display">
+                    <span id="cab-name">Default Cab: 4x12 V30</span>
+                </div>
+                <label class="ir-upload-btn">
+                    LOAD IR
+                    <input type="file" id="ir-upload" accept=".wav" style="display: none;">
+                </label>
+            </div>
+
+            <div class="vu-meter-strip">
+                <div class="vu-bar" id="vu-out"></div>
+            </div>
+
+        </main>
+
+        <footer class="footer">
+            <p>Guitar Amp Simulator By David Signals• 2026</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/app-bundle.js"></script>
+</body>
+
+</html>
