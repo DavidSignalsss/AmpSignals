@@ -17,13 +17,37 @@ High-Fidelity Neural Amp Simulation running in the browser. With IR's files uplo
 
 </div>
 
-## Getting Started
+## ✨ Features
 
-Because of how this project is set up, you can now run it directly by opening the `index.html` file in your browser, or dragging it into a browser tab.
+### 🎛️ Three Distinct Amp Archetypes
 
-### Installation
+| Archetype | Style | Inspired By |
+|-----------|-------|-------------|
+| **CLEAN (USA)** | Sparkling cleans, headroom | Fender Deluxe |
+| **DRIVE (BRIT)** | Crunchy mids, classic rock | Marshall Plexi |
+| **CHIME (UK)** | Jangly top-end, "chime" | Vox AC30 |
 
-No installation required.
+### 🎚️ Professional Control Suite
+
+| Control | Function | Range |
+|---------|----------|-------|
+| **THRESH** | Noise gate threshold | -80 - 0 |
+| **BRIGHT** | High-frequency boost | On/Off |
+| **GAIN** | Preamp gain | 0 - 10 |
+| **COMP** | Compression amount | 0.0 - 1.0 |
+| **BASS** | Low frequencies | -10dB - +10dB |
+| **MID** | Mid frequencies | -10dB - +10dB |
+| **TREBLE** | High frequencies | -10dB - +10dB |
+| **VOICE** | Mid-frequency contour | -5 - +5 |
+| **PRESENCE** | Ultra-high frequencies | 0 - 10 |
+| **MASTER** | Global volume | 0 - 10 |
+
+### 🔊 Advanced Audio Features
+
+- **Custom IR Loading** - Load your own cabinet impulse responses (.wav)
+- **Real-time Processing** - Powered by the Web Audio API
+- **Low Latency** - Optimized for live playing
+- **Responsive Design** - Works on desktop and tablet
 
 ### Running the App
 
@@ -36,3 +60,10 @@ No installation required.
 - **Neural Amp Models**: Clean (Fender), Crunch (Vox), Lead (Marshall).
 - **Interactive Controls**: Realistic knobs and switches.
 - **Audio Engine**: Low-latency web audio processing with cabinet simulation (IRs).
+
+## 🛠️ Technology Stack
+HTML5 → Structure
+CSS3 → Styling with custom properties
+JavaScript (ES6+) → Application logic
+Web Audio API → Real-time audio processing
+Font Awesome → Icons and UI elements
