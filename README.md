@@ -62,8 +62,8 @@ High-Fidelity Neural Amp Simulation running in the browser. With IR's files uplo
 - **Audio Engine**: Low-latency web audio processing with cabinet simulation (IRs).
 
 ## 🛠️ Technology Stack
-HTML5 → Structure
-CSS3 → Styling with custom properties
-JavaScript (ES6+) → Application logic
-Web Audio API → Real-time audio processing
-Font Awesome → Icons and UI elements
+- **HTML5 → Structure**
+- **CSS3 → Styling with custom properties**
+- **JavaScript (ES6+) → Application logic**
+- **Web Audio API → Real-time audio processing**
+- **Font Awesome → Icons and UI elements**
