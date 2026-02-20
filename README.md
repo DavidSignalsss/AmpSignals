@@ -10,7 +10,7 @@ High-Fidelity Neural Amp Simulation running in the browser.
 ![Fender Deluxe](Screenshots/Fender.png)
 
 ### Drive BRIT
-![Marshal Plexi](Screenshots/Marshal.png)
+![Marshall Plexi](Screenshots/Marshall.png)
 
 ### Chime UK
 ![VOX AC30](Screenshots/Vox.png)
