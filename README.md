@@ -49,11 +49,11 @@ High-Fidelity Neural Amp Simulation running in the browser. With IR's files uplo
 - **Low Latency** - Optimized for live playing
 - **Responsive Design** - Works on desktop and tablet
 
-### Running the App
+### Running the IR's files
 
-1.  Locate the folder containing this project.
-2.  Double-click `index.html`.
-3.  Click "INITIALIZE SYSTEM" to start the audio engine.
+1.  Locate the folder containing this files.
+2.  Add Impulse Responses (IRs)
+3.  Place your cabinet IR files in the /assets/irs/ folder
 
 ## Features
 
